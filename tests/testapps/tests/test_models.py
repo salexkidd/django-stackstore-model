@@ -62,6 +62,15 @@ class StackStoreModelTest(TestCase):
 
         self.assertNotEqual(original_pk, instance.pk)
 
+    def test_save_with_create_new_version_is_false(self):
+        instance = testapps_factories.Sample()
+        original_pk = instance.pk
+
+        instance.test_field = "That is test field"
+        instance.save(__create_new_version=False)
+
+        self.assertEqual(original_pk, instance.pk)
+
     def test_delete(self):
         instance = testapps_factories.Sample()
         with self.assertRaises(NotImplementedError):
