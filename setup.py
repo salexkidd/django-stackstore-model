@@ -12,7 +12,7 @@ setup(
     author="salexkidd",
     author_email="salexkidd@gmail.com",
     url="https://github.com/salexkidd/django-stackstore-model",
-    description='Django StackStore model',
+    description='Django stackstore model',
     long_description_content_type="text/markdown",
     long_description=readme,
     keywords=["django", "model", "versioning"],

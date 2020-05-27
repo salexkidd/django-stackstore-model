@@ -6,7 +6,7 @@ from django.db import models as django_models
 class StackStoreQuerySet(django_models.QuerySet):
     def delete(self):
         raise NotImplementedError(
-            "delete method is unavailable. please use 'force_delete' method."
+            "delete method is not available. Use force_delete instead."
         )
 
     def force_delete(self, *args, **kwargs):
@@ -56,28 +56,28 @@ class AbstractStackModel(django_models.Model):
     def previous_instance(self):
         return self._meta.model.objects.filter(
             stack_group_uuid=self.stack_group_uuid
-        ).filter(pk__lt=self.pk).order_by("-pk")[0] # 5 4 3 2 1 ...
+        ).filter(pk__lt=self.pk).order_by("-pk")[0]
 
     @has_pk_and_stack_group_uuid
     def next_instance(self):
-        return self._meta.model.objects.filter(stack_group_uuid=self.stack_group_uuid ).filter(pk__gt=self.pk).order_by("pk")[0]
+        return self._meta.model.objects.filter(
+            stack_group_uuid=self.stack_group_uuid).filter(
+                pk__gt=self.pk).order_by("pk")[0]
 
     @has_pk_and_stack_group_uuid
     def latest_instance(self):
         return self._meta.model.objects.filter(
-            stack_group_uuid=self.stack_group_uuid
-        ).order_by("-pk")[0] # 10 9 8 7 ...
+            stack_group_uuid=self.stack_group_uuid).order_by("-pk")[0]
 
     @has_pk_and_stack_group_uuid
     def earliest_instance(self):
         return self._meta.model.objects.filter(
-            stack_group_uuid=self.stack_group_uuid
-        ).order_by("pk")[0] # 1 2 3 4 5 ...
+            stack_group_uuid=self.stack_group_uuid).order_by("pk")[0]
 
     @has_pk_and_stack_group_uuid
     def same_group_items(self):
         return self._meta.model.objects.filter(
-            stack_group_uuid=self.stack_group_uuid).order_by("-pk")
+            stack_group_uuid=self.stack_group_uuid)
 
     def delete(self):
         raise NotImplementedError(
@@ -88,7 +88,7 @@ class AbstractStackModel(django_models.Model):
         super().delete()
 
     def save(self, *args, **kwargs):
-        if self.pk and kwargs.pop("_create_new_stack", True):
+        if self.pk and kwargs.pop("__create_new_version", True):
             self.pk = None
 
         super().save(*args, **kwargs)
@@ -99,3 +99,4 @@ class AbstractStackModel(django_models.Model):
     class Meta:
         abstract = True
         get_latest_by = "pk"
+        ordering = ['pk']

@@ -33,7 +33,6 @@ class StackStoreManagerTest(TestCase):
             queryset.filter(stack_group_uuid=instance_one.stack_group_uuid)
         )
 
-
     def test_get_latest_from_stack_group(self, *args, **kwargs):
         instance_one = testapps_factories.Sample()
         instance_two = testapps_factories.Sample()
@@ -50,7 +49,6 @@ class StackStoreManagerTest(TestCase):
             instance_one_latest,
             testapps_models.Sample.objects.filter(stack_group_uuid=instance_one.stack_group_uuid).latest(),
         )
-
 
 
 class StackStoreModelTest(TestCase):
@@ -147,7 +145,7 @@ class StackStoreModelTest(TestCase):
         for i in range(9):
             instance_one.save()
             instance_list.append(deepcopy(instance_one))
-        instance_list.reverse()
+        instance_list
 
         self.assertEqual(instance_list, list(instance_one.same_group_items()))
 

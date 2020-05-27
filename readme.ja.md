@@ -1,7 +1,7 @@
 Django Staskstore model
 =========================================================================================
 
-Djanog Stackstore is a library that can support model versioning in a minimal amount of steps.
+Djanog Stackstoreは最小の手順でモデルのバージョニングをサポートすることができるライブラリです。
 
 - Support Django 2 and 3
 - Support Python3.7, 3.8 (Maybe 2.7. Not tested)
@@ -52,14 +52,13 @@ Python shell
 2
 ```
 
-
 # API
 
 ## QuerySet & Manager
 
 ### latest_from_stack_group
 
-Returns a QuerySet of the most recent objects in each Stackgroup.
+各Stackgroupの最新のオブジェクトのクエリセットを返します。
 
 ```
 # Create instance
@@ -79,7 +78,7 @@ Returns a QuerySet of the most recent objects in each Stackgroup.
 ```
 ### get_latest_from_stack_group
 
-Returns an object that matches the collation parameter from the latest set of objects in each Stackgroup.
+各Stackgroupの最新のオブジェクト群から照合パラメタに一致するオブジェクトを返します。
 
 ```
 # Create instance
@@ -99,8 +98,8 @@ Returns an object that matches the collation parameter from the latest set of ob
 
 ### save
 
-When an object is saved, a new object is created and assigned the same stack_group_uuid as the object from which it was saved.
-This means that a new version will be generated.
+オブジェクトがsaveされると新しいオブジェクトが生成され、save元のオブジェクトと同一のstack_group_uuidが割り当てられます。
+つまり新しいバージョンが生成されることになります。
 
 ```
 >>> instance_breakfast = MySampleModel.objects.create(title="Today's breakfast", body="Spam with Egg") # Create <MySampleModel: MySampleModel object (1)>
@@ -110,7 +109,7 @@ This means that a new version will be generated.
 <StackStoreQuerySet [<MySampleModel: MySampleModel object (1)>, <MySampleModel: MySampleModel object (2)>]>
 ```
 
-If you want to save the overwrite without creating a new version, you should pass `False` to `__create_new_version` in the `save` method.
+新しいバージョンを作成せずに上書き保存をしたい場合は `save` メソッドに `__create_new_version` に `False` を渡します。
 
 ```
 >>> instance_breakfast = MySampleModel.objects.create(title="Today's breakfast", body="Spam with Egg")
@@ -121,7 +120,7 @@ If you want to save the overwrite without creating a new version, you should pas
 
 ### force_delete
 
-Remove the object.
+オブジェクトを削除します。
 
 ```
 >>> instance_breakfast = MySampleModel.objects.create(title="Today's breakfast", body="Spam with Egg") # Create <MySampleModel: MySampleModel object (1)>
@@ -132,11 +131,11 @@ Remove the object.
 <StackStoreQuerySet []>
 ```
 
-Calling the existing `delete` method will raise a NotImplementedError exception.
+既存の`delete`メソッドを呼び出すとNotImplementedError例外を送出します。
 
 ### same_group_items
 
-Returns a QuerySet that returns all objects belonging to the same Stackgroup.
+同一のStackgroupに属しているすべてのオブジェクトを返すQuerySetを返します。
 
 ```
 >>> instance_breakfast = MySampleModel.objects.create(title="Today's breakfast", body="Spam with Egg") # Create <MySampleModel: MySampleModel object (1)>
@@ -145,9 +144,10 @@ Returns a QuerySet that returns all objects belonging to the same Stackgroup.
 <StackStoreQuerySet [<MySampleModel: MySampleModel object (3)>, <MySampleModel: MySampleModel object (2)>, <MySampleModel: MySampleModel object (1)>]>
 ```
 
+
 ### previous_instance
 
-Returns the previous version of the object.
+一つ前のバージョンのオブジェクトを返します。
 
 ```
 >>> instance_breakfast = MySampleModel.objects.create(title="Today's breakfast", body="Spam with Egg") # Create <MySampleModel: MySampleModel object (1)>
@@ -157,12 +157,12 @@ Returns the previous version of the object.
 <MySampleModel: MySampleModel object (1)>
 ```
 
-Throws a DoesNotExist exception if the object does not exist.
+該当するオブジェクトが存在しない場合、DoesNotExist例外を送出します。
 
 
 ### next_instance
 
-Returns the next version of the object.
+次のバージョンのオブジェクトを返します。
 
 ```
 >>> instance_breakfast = MySampleModel.objects.create(title="Today's breakfast", body="Spam with Egg") # Create <MySampleModel: MySampleModel object (1)>
@@ -172,12 +172,12 @@ Returns the next version of the object.
 <MySampleModel: MySampleModel object (3)>
 ```
 
-Throws a DoesNotExist exception if the object does not exist.
+該当するオブジェクトが存在しない場合、DoesNotExist例外を送出します。
 
 
 ### latest_instance
 
-Returns the most recent object of the Stackgroup to which its own object belongs.
+自身のオブジェクトが属するStackgroupの最新のオブジェクトを返します。
 
 ```
 >>> instance_breakfast = MySampleModel.objects.create(title="Today's breakfast", body="Spam with Egg") # Create <MySampleModel: MySampleModel object (1)>
@@ -187,12 +187,12 @@ Returns the most recent object of the Stackgroup to which its own object belongs
 <MySampleModel: MySampleModel object (3)>
 ```
 
-Throws a DoesNotExist exception if the object does not exist.
+該当するオブジェクトが存在しない場合、DoesNotExist例外を送出します。
 
 
 ### earliest_instance
 
-Returns the oldest object in the Stackgroup to which its own object belongs.
+自身のオブジェクトが属するStackgroupの最古のオブジェクトを返します。
 
 ```
 >>> instance_breakfast = MySampleModel.objects.create(title="Today's breakfast", body="Spam with Egg") # Create <MySampleModel: MySampleModel object (1)>
@@ -202,4 +202,4 @@ Returns the oldest object in the Stackgroup to which its own object belongs.
 <MySampleModel: MySampleModel object (1)>
 ```
 
-Throws a DoesNotExist exception if the object does not exist.
+該当するオブジェクトが存在しない場合、DoesNotExist例外を送出します。

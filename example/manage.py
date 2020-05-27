@@ -3,9 +3,11 @@
 import os
 import sys
 
+sys.path.append("../")
+
 
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tests.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'example.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

@@ -34,7 +34,7 @@ class AbstractStackStoreAdmin(admin.ModelAdmin):
     actions = []
 
     list_filter = (OnlyLatestsFilter,)
-    list_display_links = ("stack_group_uuid",)
+    list_display_links = ("id", "stack_group_uuid",)
     list_display = ("id", "stack_group_uuid", "only_same_item",)
     search_fields = ("stack_group_uuid",)
 
@@ -63,6 +63,6 @@ class AbstractStackStoreAdmin(admin.ModelAdmin):
 
         if only_latests_form.is_valid():
             if only_latests_form.cleaned_data["only_latests"] == "YES":
-                qset = qset.filter_from_latests()
+                qset = qset.latest_from_stack_group()
 
         return qset
