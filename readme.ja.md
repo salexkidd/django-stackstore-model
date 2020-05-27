@@ -1,5 +1,9 @@
+
+
 Django Staskstore model
 =========================================================================================
+
+[![CircleCI](https://circleci.com/gh/salexkidd/django-stackstore-model.svg?style=svg)](https://circleci.com/gh/salexkidd/django-stackstore-model)
 
 Djanog Stackstoreは最小の手順でモデルのバージョニングをサポートすることができるライブラリです。
 
@@ -203,3 +207,8 @@ Python shell
 ```
 
 該当するオブジェクトが存在しない場合、DoesNotExist例外を送出します。
+
+
+# ライセンス
+
+MIT License

@@ -1,6 +1,8 @@
 Django Staskstore model
 =========================================================================================
 
+[![CircleCI](https://circleci.com/gh/salexkidd/django-stackstore-model.svg?style=svg)](https://circleci.com/gh/salexkidd/django-stackstore-model)
+
 Djanog Stackstore is a library that can support model versioning in a minimal amount of steps.
 
 - Support Django 2 and 3
@@ -203,3 +205,8 @@ Returns the oldest object in the Stackgroup to which its own object belongs.
 ```
 
 Throws a DoesNotExist exception if the object does not exist.
+
+
+# License
+
+MIT License
