@@ -5,7 +5,7 @@ Django Staskstore model
 
 [![CircleCI](https://circleci.com/gh/salexkidd/django-stackstore-model.svg?style=svg)](https://circleci.com/gh/salexkidd/django-stackstore-model)
 
-Djanog Stackstoreは最小の手順でモデルのバージョニングをサポートすることができるライブラリです。
+`django-staskstore-model`は最小の手順でモデルのバージョニングをサポートすることができるライブラリです。
 
 - Support Django 2 and 3
 - Support Python3.7, 3.8 (Maybe 2.7. Not tested)
@@ -55,6 +55,20 @@ Python shell
 >>> previous_instance.next_instance().pk
 2
 ```
+
+## Admin Extension
+
+Stackstore-model では Admin拡張を提供しています。
+
+### 最新のバージョンのオブジェクトのみを表示するフィルタ
+
+<img src="https://raw.githubusercontent.com/wiki/salexkidd/django-stackstore-model/images/latest_only.gif" width="800px">
+
+
+###  同じstackgroup_uuidを持つアイテムのみの表示
+
+<img src="https://raw.githubusercontent.com/wiki/salexkidd/django-stackstore-model/images/same_item.gif" width="800px">
+
 
 # API
 
@@ -207,6 +221,18 @@ Python shell
 ```
 
 該当するオブジェクトが存在しない場合、DoesNotExist例外を送出します。
+
+
+# Demo
+
+Dockerの設定を用意しています。以下のコマンドを用いて起動してください。起動が完了したら [http://localhost:8000](http://localhost:8000) にアクセスしてください。
+
+ログインアカウントは ID: `admin` Password: `admin` です
+
+です
+```
+$ docker-compose up
+```
 
 
 # ライセンス

@@ -6,7 +6,6 @@ from django.urls import path, reverse
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
 
-
 ONLY_LATESTS_CHOICE_TUPLE = (
     ('YES', _('YES (Latests Only)')),
 )
@@ -31,20 +30,33 @@ class OnlyLatestsFilter(admin.SimpleListFilter):
 
 
 class AbstractStackStoreAdmin(admin.ModelAdmin):
+
     actions = []
 
-    list_filter = (OnlyLatestsFilter,)
-    list_display_links = ("id", "stack_group_uuid",)
-    list_display = ("id", "stack_group_uuid", "only_same_item",)
-    search_fields = ("stack_group_uuid",)
+    list_filter = (
+        OnlyLatestsFilter,
+    )
+
+    list_display_links = (
+        "stack_group_uuid",
+    )
+
+    list_display = (
+        "id",
+        "stack_group_uuid",
+        "only_same_item",
+    )
+
+    search_fields = (
+        "id",
+        "stack_group_uuid",
+    )
 
     def short_stack_group_uuid(self, obj):
         return obj.stack_group_uuid.hex[:10]
 
     def only_same_item(self, obj):
-        url = reverse(
-            "admin:{}_{}_changelist".format(
-                obj._meta.app_label, obj._meta.model_name))
+        url = reverse("admin:{}_{}_changelist".format(obj._meta.app_label, obj._meta.model_name))
 
         url_parts = list(urlparse.urlparse(url))
         query = dict(urlparse.parse_qsl(url_parts[4]))

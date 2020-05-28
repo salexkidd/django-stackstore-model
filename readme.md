@@ -3,13 +3,15 @@ Django Staskstore model
 
 [![CircleCI](https://circleci.com/gh/salexkidd/django-stackstore-model.svg?style=svg)](https://circleci.com/gh/salexkidd/django-stackstore-model)
 
-Djanog Stackstore is a library that can support model versioning in a minimal amount of steps.
+`django-staskstore-model` is a library that can support model versioning in a minimal amount of steps.
 
 - Support Django 2 and 3
 - Support Python3.7, 3.8 (Maybe 2.7. Not tested)
-
+- Admin extensions are supported.
 
 # Usage
+
+## Model
 
 ```
 # models.py
@@ -53,6 +55,17 @@ Python shell
 >>> previous_instance.next_instance().pk
 2
 ```
+
+## Admin Extension
+
+###  Filter to show only the latest version of the object
+
+<img src="https://raw.githubusercontent.com/wiki/salexkidd/django-stackstore-model/images/latest_only.gif" width="800px">
+
+
+### Show only items with the same stackgroup_uuid
+
+<img src="https://raw.githubusercontent.com/wiki/salexkidd/django-stackstore-model/images/same_item.gif" width="800px">
 
 
 # API
@@ -206,6 +219,16 @@ Returns the oldest object in the Stackgroup to which its own object belongs.
 
 Throws a DoesNotExist exception if the object does not exist.
 
+
+# Demo
+
+The Docker configuration is provided. Please use the following command to start it. Go to [http://localhost:8000](http://localhost:8000) when the launch is complete.
+
+```
+$ docker-compose up
+```
+
+Login account is ID: `admin` Password: `admin`
 
 # License
 
